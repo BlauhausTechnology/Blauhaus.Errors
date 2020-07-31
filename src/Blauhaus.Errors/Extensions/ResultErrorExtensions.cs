@@ -1,5 +1,4 @@
-﻿using Blauhaus.Common.ValueObjects.Extensions;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 
 namespace Blauhaus.Errors.Extensions
 {

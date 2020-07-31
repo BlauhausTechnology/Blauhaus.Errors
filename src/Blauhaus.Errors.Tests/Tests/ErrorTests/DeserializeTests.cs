@@ -1,5 +1,4 @@
-﻿using Blauhaus.Common.ValueObjects.Errors;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Blauhaus.Errors.Tests.Tests.ErrorTests
 {
