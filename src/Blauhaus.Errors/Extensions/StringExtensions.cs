@@ -26,7 +26,7 @@
                 return true;
             }
 
-            error = null;
+            error = default;
             return false;
         }
 

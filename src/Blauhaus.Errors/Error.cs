@@ -4,9 +4,9 @@ using Blauhaus.Common.ValueObjects._Base;
 
 namespace Blauhaus.Errors
 {
-    public class Error : BaseValueObject<Error>
+    public readonly struct Error : IEquatable<Error>
     {
-        public Error(string code, string description)
+        private Error(string code, string description)
         {
             Code = code;
             Description = description;
@@ -41,19 +41,31 @@ namespace Blauhaus.Errors
             return $"{Code} ::: {Description}";
         }
 
+         
 
-        protected override int GetHashCodeCore()
-        {
-            unchecked
-            {
-                return (Code.GetHashCode() * 397);
-            }
-        }
-
-        protected override bool EqualsCore(Error other)
+        public bool Equals(Error other)
         {
             return string.Equals(Code, other.Code, StringComparison.InvariantCultureIgnoreCase);
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Error other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return Code.GetHashCode();
+        }
+
+        public static bool operator ==(Error left, Error right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Error left, Error right)
+        {
+            return !left.Equals(right);
+        }
     }
 }
