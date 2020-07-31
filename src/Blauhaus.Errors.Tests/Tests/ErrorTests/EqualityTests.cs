@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Blauhaus.Errors.Tests.Tests._Base;
 using NUnit.Framework;
 
 namespace Blauhaus.Errors.Tests.Tests.ErrorTests

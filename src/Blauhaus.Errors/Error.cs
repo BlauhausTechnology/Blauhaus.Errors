@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using Blauhaus.Common.ValueObjects._Base;
 
 namespace Blauhaus.Errors
 {
