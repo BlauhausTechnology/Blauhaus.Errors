@@ -1,5 +1,4 @@
-﻿using Blauhaus.Common.ValueObjects.Errors;
-
+﻿
 namespace Blauhaus.Errors.Tests.Tests.ErrorTests
 {
     public static class TestErrors
