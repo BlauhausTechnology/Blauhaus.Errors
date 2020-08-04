@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Blauhaus.Errors.Extensions;
 using CSharpFunctionalExtensions;
 
 namespace Blauhaus.Errors
 {
-
 
     /// <summary>
     /// For all those times (cough RX cough) when you have to return an exception as the error condition
@@ -23,12 +23,12 @@ namespace Blauhaus.Errors
 
         public ErrorException(string serializedError) : base(serializedError)
         {
-            Error = serializedError.ToError();
+            Error = serializedError.IsError(out var error) ? error : Errors.Undefined;
         }
         
         public ErrorException(Result result) : base(result.Error)
-        {
-            Error = result.Error.ToError();
+        { 
+            Error = result.Error.IsError(out var error) ? error : Errors.Undefined;
         }
 
         public Error Error { get; }
