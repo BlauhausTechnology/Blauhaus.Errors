@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Blauhaus.Errors
 {
+    [Preserve]
     public readonly struct Error : IEquatable<Error>
     {
         private Error(string code, string description)
