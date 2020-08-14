@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Blauhaus.Common.Utils.Attributes;
 using Blauhaus.Errors.Extensions;
 using CSharpFunctionalExtensions;
 
@@ -9,6 +10,7 @@ namespace Blauhaus.Errors
     /// <summary>
     /// For all those times (cough RX cough) when you have to return an exception as the error condition
     /// </summary>
+    [Preserve]
     public class ErrorException : Exception
     {
         public ErrorException(Error error, Exception innerException) : base(error.ToString(), innerException)

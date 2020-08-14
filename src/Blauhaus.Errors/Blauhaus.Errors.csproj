@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSharpFunctionalExtensions" Version="2.11.3" />
+    <PackageReference Include="Blauhaus.Common.Utils" Version="1.7.5" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.11.5" />
   </ItemGroup>
 
 </Project>
