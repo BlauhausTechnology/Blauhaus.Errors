@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using Blauhaus.Common.Utils.Attributes;
 
 namespace Blauhaus.Errors
 {
-    [Preserve]
-    public readonly struct Error : IEquatable<Error>
+    [Preserve, DataContract]
+    public struct Error : IEquatable<Error>
     {
         private Error(string code, string description)
         {
@@ -13,8 +14,11 @@ namespace Blauhaus.Errors
             Description = description;
         }
 
-        public string Code { get; }
-        public string Description { get; }
+        [DataMember]
+        public string Code { get; private set; }
+
+        [DataMember]
+        public string Description { get; private set; }
 
 
         /// <summary>
@@ -26,6 +30,8 @@ namespace Blauhaus.Errors
         {
             return new Error(errorCode, errorDescription);
         }
+
+        public static Error None { get; } = Error.Create("The operation succeeded. there is no Error");
 
         public static Error Deserialize(string serializedError)
         {

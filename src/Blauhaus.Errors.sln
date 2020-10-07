@@ -8,9 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.github\workflows\blauhaus.yml = ..\.github\workflows\blauhaus.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blauhaus.Errors", "Blauhaus.Errors\Blauhaus.Errors.csproj", "{A330B76B-B799-402F-A9A5-CF166DC0F82D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blauhaus.Errors", "Blauhaus.Errors\Blauhaus.Errors.csproj", "{A330B76B-B799-402F-A9A5-CF166DC0F82D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blauhaus.Errors.Tests", "Blauhaus.Errors.Tests\Blauhaus.Errors.Tests.csproj", "{DADB0034-01A2-478F-BDEF-5AEF88668B20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blauhaus.Errors.Tests", "Blauhaus.Errors.Tests\Blauhaus.Errors.Tests.csproj", "{DADB0034-01A2-478F-BDEF-5AEF88668B20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blauhaus.Responses", "Blauhaus.Responses\Blauhaus.Responses.csproj", "{43E52590-159D-4B46-9A02-A03B362C7857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{DADB0034-01A2-478F-BDEF-5AEF88668B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DADB0034-01A2-478F-BDEF-5AEF88668B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DADB0034-01A2-478F-BDEF-5AEF88668B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43E52590-159D-4B46-9A02-A03B362C7857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E52590-159D-4B46-9A02-A03B362C7857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E52590-159D-4B46-9A02-A03B362C7857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E52590-159D-4B46-9A02-A03B362C7857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

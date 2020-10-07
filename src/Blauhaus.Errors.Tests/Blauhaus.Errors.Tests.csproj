@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blauhaus.Errors\Blauhaus.Errors.csproj" />
+    <ProjectReference Include="..\Blauhaus.Responses\Blauhaus.Responses.csproj" />
   </ItemGroup>
 
 </Project>
