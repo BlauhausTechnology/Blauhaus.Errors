@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Blauhaus.Common.Utils.Attributes;
 
 namespace Blauhaus.Errors
 {
