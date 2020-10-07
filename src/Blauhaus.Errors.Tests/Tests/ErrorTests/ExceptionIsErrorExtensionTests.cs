@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Blauhaus.Errors.Tests.Tests.ErrorTests
 {
-    public class ExceptionIsErrorExceptionTests
+    public class ExceptionIsErrorExtensionTests
     {
         [Test]
         public void IF_Exception_Is_ErrorException_and_Error_is_same_SHOULD_return_TRUE()

@@ -29,5 +29,17 @@ namespace Blauhaus.Errors.Extensions
             }
             throw new ArgumentException("Given exception is not an ErrorException");
         }
+
+        public static bool TryGetError(this Exception exception, out Error? error)
+        {
+            if (exception is ErrorException errorException)
+            {
+                error = errorException.Error;
+                return true;
+            }
+
+            error = null;
+            return false;
+        }
     }
 }
