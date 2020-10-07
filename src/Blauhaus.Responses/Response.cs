@@ -17,11 +17,11 @@ namespace Blauhaus.Responses
         }
 
         [DataMember]
-        public bool IsSuccess { get; private set; }
+        public bool IsSuccess { get; set; }
         [DataMember]
-        public bool IsFailure { get; private set; }
+        public bool IsFailure { get; set; }
         [DataMember]
-        public Error Error { get; private set; }
+        public Error Error { get; set; }
 
         public static Response Success() => _success;
         public static Response Failure(Error error)
