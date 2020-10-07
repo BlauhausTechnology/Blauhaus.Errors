@@ -18,6 +18,8 @@ jobs:
        run: |
         dotnet build ./src/Blauhaus.Errors.sln --configuration Release
         dotnet pack ./src/Blauhaus.Errors/Blauhaus.Errors.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
+        dotnet pack ./src/Blauhaus.Responses/Blauhaus.Responses.csproj -p:PackageVersion=${VERSION_NAME} --no-build --output ./ --configuration Release 
      - name: Deploy NuGet Package
        run:  |
         dotnet nuget push /home/runner/work/Blauhaus.Errors/Blauhaus.Errors/Blauhaus.Errors.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+        dotnet nuget push /home/runner/work/Blauhaus.Errors/Blauhaus.Errors/Blauhaus.Responses.${VERSION_NAME}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
