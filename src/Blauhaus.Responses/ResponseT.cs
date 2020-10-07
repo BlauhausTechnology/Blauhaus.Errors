@@ -1,12 +1,23 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Blauhaus.Errors;
 
 namespace Blauhaus.Responses
 {
-    [Serializable, DataContract]
+    [Serializable]
     public struct Response<T>
     { 
+
+        [JsonConstructor]
+        public Response(bool isSuccess, bool isFailure, Error error, T value)
+        {
+            IsSuccess = isSuccess;
+            IsFailure = isFailure;
+            Error = error;
+            Value = value;
+        }
+
         public Response(bool isSuccess, Error error, T value)
         {
             IsSuccess = isSuccess;
@@ -15,14 +26,10 @@ namespace Blauhaus.Responses
             Value = value;
         }
 
-        [DataMember]
-        public bool IsSuccess { get; private set; }
-        [DataMember]
-        public bool IsFailure { get; private set;}
-        [DataMember]
-        public Error Error { get; private set;}
-        [DataMember]
-        public T Value { get; private set;}
+        public bool IsSuccess { get; }
+        public bool IsFailure { get; }
+        public Error Error { get; }
+        public T Value { get; }
          
         public override string ToString()
         {

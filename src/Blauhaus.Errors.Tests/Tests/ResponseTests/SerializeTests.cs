@@ -1,7 +1,8 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
 using Blauhaus.Responses;
-using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Blauhaus.Errors.Tests.Tests.ResponseTests
 {
@@ -17,8 +18,8 @@ namespace Blauhaus.Errors.Tests.Tests.ResponseTests
             var response = Response.Success();
 
             //Act
-            var serialized = JsonConvert.SerializeObject(response);
-            var deserialized = JsonConvert.DeserializeObject<Response>(serialized);
+            var serialized = JsonSerializer.Serialize(response);
+            var deserialized = JsonSerializer.Deserialize<Response>(serialized);
 
             //Assert
             Assert.That(deserialized.IsSuccess);
@@ -31,8 +32,8 @@ namespace Blauhaus.Errors.Tests.Tests.ResponseTests
             var response = Response.Failure(TestError);
 
             //Act
-            var serialized = JsonConvert.SerializeObject(response);
-            var deserialized = JsonConvert.DeserializeObject<Response>(serialized);
+            var serialized = JsonSerializer.Serialize(response);
+            var deserialized = JsonSerializer.Deserialize<Response>(serialized);
 
             //Assert
             Assert.That(deserialized.IsFailure);
@@ -48,8 +49,8 @@ namespace Blauhaus.Errors.Tests.Tests.ResponseTests
             var response = Response.Success(value);
 
             //Act
-            var serialized = JsonConvert.SerializeObject(response);
-            var deserialized = JsonConvert.DeserializeObject<Response<string>>(serialized);
+            var serialized = JsonSerializer.Serialize(response);
+            var deserialized = JsonSerializer.Deserialize<Response<string>>(serialized);
 
             //Assert
             Assert.That(deserialized.IsSuccess);
@@ -63,8 +64,8 @@ namespace Blauhaus.Errors.Tests.Tests.ResponseTests
             var response = Response.Failure<string>(TestError);
 
             //Act
-            var serialized = JsonConvert.SerializeObject(response);
-            var deserialized = JsonConvert.DeserializeObject<Response<string>>(serialized);
+            var serialized = JsonSerializer.Serialize(response);
+            var deserialized = JsonSerializer.Deserialize<Response<string>>(serialized);
 
             //Assert
             Assert.That(deserialized.IsFailure);

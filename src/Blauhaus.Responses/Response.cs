@@ -1,13 +1,22 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Blauhaus.Errors;
 
 namespace Blauhaus.Responses
 {
-    [Serializable, DataContract]
-    public struct Response
+    [Serializable]
+    public readonly struct Response
     { 
+
         private static Response _success = new Response(true, Error.None);
+
+        [JsonConstructor]
+        public Response(bool isSuccess, bool isFailure, Error error)
+        {
+            IsSuccess = isSuccess;
+            IsFailure = isFailure;
+            Error = error;
+        }
 
         public Response(bool isSuccess, Error error)
         {
@@ -16,12 +25,9 @@ namespace Blauhaus.Responses
             Error = error;
         }
 
-        [DataMember]
-        public bool IsSuccess { get; set; }
-        [DataMember]
-        public bool IsFailure { get; set; }
-        [DataMember]
-        public Error Error { get; set; }
+        public bool IsSuccess { get; }
+        public bool IsFailure { get; }
+        public Error Error { get; }
 
         public static Response Success() => _success;
         public static Response Failure(Error error)
