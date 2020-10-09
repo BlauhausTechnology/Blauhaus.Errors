@@ -32,6 +32,7 @@ namespace Blauhaus.Errors
         }
 
         public static Error None { get; } = Error.Create("No errors");
+        public static Error Generic(string description) => new Error("Error", description);
 
         public static Error Deserialize(string serializedError)
         {

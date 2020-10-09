@@ -34,10 +34,19 @@ namespace Blauhaus.Responses
         {
             return new Response(false, error);
         }
+        public static Response Failure(string errorMessage)
+        {
+            return new Response(false, Error.Generic(errorMessage));
+        }
 
         public static Response<T> Failure<T>(Error error)
         {
             return new Response<T>(false, error, default);
+        }
+        
+        public static Response<T> Failure<T>(string errorMessage)
+        {
+            return new Response<T>(false, Error.Generic(errorMessage), default);
         }
 
         public static Response<T> Success<T>(T value)
