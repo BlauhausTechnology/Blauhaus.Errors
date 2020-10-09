@@ -7,5 +7,6 @@ namespace Blauhaus.Errors.Handler
     {
         Task HandleExceptionAsync(object sender, Exception exception);
         Task HandleErrorAsync(string errorMessage);
+        Task HandleErrorAsync(Error errorMessage);
     }
 }
