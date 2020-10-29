@@ -4,5 +4,6 @@
     {
         public static Error Undefined = Error.Create("No definition exists for this error");
         public static Error Unexpected(string errorMessage = "") => Error.Create("An unexpected error has occured" + errorMessage == "" ? "" : ": " + errorMessage);
+        public static Error Cancelled = Error.Create("The operation was cancelled");
     }
 }
