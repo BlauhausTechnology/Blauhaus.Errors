@@ -1,17 +1,18 @@
 ﻿using Blauhaus.Errors.Extensions;
-using CSharpFunctionalExtensions;
+using Blauhaus.Responses;
+using Blauhaus.Responses.Extensions;
 using NUnit.Framework;
 
 namespace Blauhaus.Errors.Tests.Tests.ErrorTests
 {
-    public class ResultIsErrorTests
+    public class ResponseIsErrorTests
     {
         [Test]
         public void IF_Result_is_success_SHOULD_return_false()
         {
             //Arrange
-            var successOne = Result.Success();
-            var successTwo = Result.Success<int>(1);
+            var successOne = Response.Success();
+            var successTwo = Response.Success<int>(1);
 
             //Act
             var resultOne = successOne.IsError(TestErrors.TestErrorOne);
@@ -26,10 +27,10 @@ namespace Blauhaus.Errors.Tests.Tests.ErrorTests
         public void IF_Result_failure_is_same_serialized_Error_SHOULD_return_true()
         {
             //Arrange
-            var failOne = Result.Failure(TestErrors.TestErrorOne.ToString());
-            var failTwo = Result.Failure<int>(TestErrors.TestErrorTwo.ToString());
-            var failThree = Result.Failure(TestErrors.TestErrorThree("three").ToString());
-            var failFour = Result.Failure(TestErrors.TestErrorThree("four").ToString());
+            var failOne = Response.Failure(TestErrors.TestErrorOne);
+            var failTwo = Response.Failure<int>(TestErrors.TestErrorTwo);
+            var failThree = Response.Failure(TestErrors.TestErrorThree("three"));
+            var failFour = Response.Failure(TestErrors.TestErrorThree("four"));
 
             //Act
             var resultOne = failOne.IsError(TestErrors.TestErrorOne);
@@ -48,10 +49,10 @@ namespace Blauhaus.Errors.Tests.Tests.ErrorTests
         public void IF_Result_failure_is_different_serialized_Error_SHOULD_return_false()
         {
             //Arrange
-            var failOne = Result.Failure(TestErrors.TestErrorOne.ToString());
-            var failTwo = Result.Failure<int>(TestErrors.TestErrorTwo.ToString());
-            var failThree = Result.Failure(TestErrors.TestErrorThree("three").ToString());
-            var failFour = Result.Failure(TestErrors.TestErrorThree("four").ToString());
+            var failOne = Response.Failure(TestErrors.TestErrorOne.ToString());
+            var failTwo = Response.Failure<int>(TestErrors.TestErrorTwo.ToString());
+            var failThree = Response.Failure(TestErrors.TestErrorThree("three").ToString());
+            var failFour = Response.Failure(TestErrors.TestErrorThree("four").ToString());
 
             //Act
             var resultOne = failOne.IsError(TestErrors.TestErrorTwo);

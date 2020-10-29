@@ -1,6 +1,5 @@
 ﻿using Blauhaus.Errors;
 using Blauhaus.Errors.Extensions;
-using CSharpFunctionalExtensions;
 
 namespace Blauhaus.Responses.Extensions
 {

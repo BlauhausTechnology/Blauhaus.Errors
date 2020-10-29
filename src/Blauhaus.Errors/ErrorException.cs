@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using Blauhaus.Common.Utils.Attributes;
 using Blauhaus.Errors.Extensions;
-using CSharpFunctionalExtensions;
 
 namespace Blauhaus.Errors
 {
@@ -27,11 +26,7 @@ namespace Blauhaus.Errors
         {
             Error = serializedError.IsError(out var error) ? error : Errors.Undefined;
         }
-        
-        public ErrorException(Result result) : base(result.Error)
-        { 
-            Error = result.Error.IsError(out var error) ? error : Errors.Undefined;
-        }
+         
 
         public Error Error { get; }
     }
