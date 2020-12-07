@@ -1,4 +1,7 @@
-﻿namespace Blauhaus.Errors.Extensions
+﻿using System;
+using System.Linq.Expressions;
+
+namespace Blauhaus.Errors.Extensions
 {
     public static class StringExtensions
     {
@@ -34,5 +37,6 @@
         {
             return Error.Deserialize(serializedError);
         }
+
     }
 }
