@@ -8,7 +8,6 @@ namespace Blauhaus.Responses
     [Serializable]
     public readonly struct Response
     { 
-
         private static Response _success = new Response(true, Error.None);
         private static Task<Response> _successTask = Task.FromResult(_success);
 
