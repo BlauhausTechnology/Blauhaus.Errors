@@ -49,10 +49,10 @@ namespace Blauhaus.Errors.Tests.Tests.ErrorTests
         public void IF_Result_failure_is_different_serialized_Error_SHOULD_return_false()
         {
             //Arrange
-            var failOne = Response.Failure(TestErrors.TestErrorOne.ToString());
-            var failTwo = Response.Failure<int>(TestErrors.TestErrorTwo.ToString());
-            var failThree = Response.Failure(TestErrors.TestErrorThree("three").ToString());
-            var failFour = Response.Failure(TestErrors.TestErrorThree("four").ToString());
+            var failOne = Response.Failure(TestErrors.TestErrorOne);
+            var failTwo = Response.Failure<int>(TestErrors.TestErrorTwo);
+            var failThree = Response.Failure(TestErrors.TestErrorThree("three"));
+            var failFour = Response.Failure(TestErrors.TestErrorThree("four"));
 
             //Act
             var resultOne = failOne.IsError(TestErrors.TestErrorTwo);
