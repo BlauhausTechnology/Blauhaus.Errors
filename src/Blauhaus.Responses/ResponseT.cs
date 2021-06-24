@@ -6,7 +6,7 @@ using Blauhaus.Errors;
 namespace Blauhaus.Responses
 {
     [Serializable]
-    public readonly struct Response<T> 
+    public readonly struct Response<T> : IResponse<T>
     { 
 
         [JsonConstructor]

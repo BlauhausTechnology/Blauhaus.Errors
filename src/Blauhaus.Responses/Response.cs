@@ -6,7 +6,7 @@ using Blauhaus.Errors;
 namespace Blauhaus.Responses
 {
     [Serializable]
-    public readonly struct Response
+    public readonly struct Response : IResponse
     { 
         private static Response _success = new Response(true, Error.None);
         private static Task<Response> _successTask = Task.FromResult(_success);
@@ -37,9 +37,17 @@ namespace Blauhaus.Responses
         {
             return new Response(false, error);
         }
+        public static Response Failure(IResponse response)
+        {
+            return new Response(false, response.Error);
+        }
         public static Task<Response> FailureTask(Error error)
         {
             return Task.FromResult(new Response(false, error));
+        }
+        public static Task<Response> FailureTask(IResponse response)
+        {
+            return Task.FromResult(new Response(false, response.Error));
         }
 
         public static Response Failure(string errorMessage)
@@ -51,9 +59,17 @@ namespace Blauhaus.Responses
         {
             return new Response<T>(false, error, default);
         }
+        public static Response<T> Failure<T>(IResponse response)
+        {
+            return Failure<T>(response.Error);
+        }
         public static Task<Response<T>> FailureTask<T>(Error error)
         {
             return Task.FromResult(new Response<T>(false, error, default));
+        }
+        public static Task<Response<T>> FailureTask<T>(IResponse response)
+        {
+            return Response.FailureTask<T>(response.Error);
         }
         
         public static Response<T> Failure<T>(string errorMessage)
@@ -65,9 +81,17 @@ namespace Blauhaus.Responses
         {
             return new Response<T>(true, Error.None, value);
         }
+        public static Response<T> Success<T>(IResponse<T> response)
+        {
+            return Response.Success(response.Value);
+        }
         public static Task<Response<T>> SuccessTask<T>(T value)
         {
             return Task.FromResult(new Response<T>(true, Error.None, value));
+        }
+        public static Task<Response<T>> SuccessTask<T>(IResponse<T> response)
+        {
+            return Response.SuccessTask(response.Value);
         }
 
         public override string ToString()
