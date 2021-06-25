@@ -32,7 +32,11 @@ namespace Blauhaus.Responses
 
         public static Response Success() => _success;
         public static Task<Response> SuccessTask() => _successTask;
-
+        
+        public static Response Failure(string error)
+        {
+            return Failure(Error.Generic(error));
+        }
         public static Response Failure(Error error)
         {
             return new Response(false, error);
@@ -50,6 +54,10 @@ namespace Blauhaus.Responses
             return Task.FromResult(new Response(false, response.Error));
         }
          
+        public static Response<T> Failure<T>(string error)
+        {
+            return Failure<T>(Error.Generic(error));
+        }
         public static Response<T> Failure<T>(Error error)
         {
             return new Response<T>(false, error, default);
