@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Blauhaus.Errors;
+using Blauhaus.Errors.Extensions;
 
 namespace Blauhaus.Responses
 {
@@ -33,9 +34,11 @@ namespace Blauhaus.Responses
         public static Response Success() => _success;
         public static Task<Response> SuccessTask() => _successTask;
         
-        public static Response Failure(string error)
+        public static Response Failure(string errorText)
         {
-            return Failure(Error.Generic(error));
+            return Failure(errorText.IsError(out var error) 
+                ? error 
+                : Error.Generic(errorText));
         }
         public static Response Failure(Error error)
         {
@@ -54,9 +57,11 @@ namespace Blauhaus.Responses
             return Task.FromResult(new Response(false, response.Error));
         }
          
-        public static Response<T> Failure<T>(string error)
+        public static Response<T> Failure<T>(string errorText)
         {
-            return Failure<T>(Error.Generic(error));
+            return Failure<T>(errorText.IsError(out var error) 
+                ? error 
+                : Error.Generic(errorText));
         }
         public static Response<T> Failure<T>(Error error)
         {
