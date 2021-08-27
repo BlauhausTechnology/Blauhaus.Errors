@@ -19,7 +19,13 @@ namespace Blauhaus.Errors
 
         //Invalid value
         public static Error InvalidValue() => Error.Create("One of the given values was invalid");
-        public static Error InvalidValue(string propertyName) => Error.Create($"The value provided for {propertyName} was invalid");
+
+        public static Error InvalidValue(string propertyName, string reason = "")
+        {
+            return string.IsNullOrEmpty(reason)
+                ? Error.Create($"The value provided for {propertyName} was invalid")
+                : Error.Create($"The value provided for {propertyName} was invalid: {reason}");
+        }
         public static Error InvalidValue<T>() => Error.Create($"The {typeof(T).Name} was invalid");
         public static Error InvalidValue<T>(Expression<Func<T, object>> property) => Error.Create($"The value provided for {property.ToPropertyName()} on {typeof(T).Name} was invalid");
         public static Error InvalidValue<T>(Expression<Func<T, object>> property,  string reason) 
