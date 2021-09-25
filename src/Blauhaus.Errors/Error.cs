@@ -65,11 +65,6 @@ namespace Blauhaus.Errors
         public static Error InvalidValue<T>(Expression<Func<T, object>> property,  string reason) 
             => Error.Create($"The value provided for {property.ToPropertyName()} on {typeof(T).Name} was invalid: {reason}");
 
-        //Auth
-        public static Error NotAuthenticated() => Error.Create("Not authenticated");
-        public static Error NotAuthorized() => Error.Create("Not authorized");
-
-
 
         #region Equality
         
