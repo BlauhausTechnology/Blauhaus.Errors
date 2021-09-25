@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using Blauhaus.Common.Utils.Attributes;
+using Blauhaus.Common.Utils.Extensions;
 
 namespace Blauhaus.Errors
 {
@@ -19,7 +21,6 @@ namespace Blauhaus.Errors
         public string Code { get; }
 
         public string Description { get; }
-
 
         /// <summary>
         /// Uses the caller's name as the Error Code.
@@ -43,13 +44,40 @@ namespace Blauhaus.Errors
             }
             return new Error(deserialized[0], deserialized[1]);
         }
+
+
+        public static Error Undefined = Error.Create("No definition exists for this error");
+        public static Error Unexpected(string errorMessage = "") => Error.Create("An unexpected error has occured" + errorMessage == "" ? "" : ": " + errorMessage);
+        public static Error Cancelled = Error.Create("The operation was cancelled");
+
+        
+        //Required value
+        public static Error RequiredValue() => Error.Create("A required parameter was not provided");
+        public static Error RequiredValue(string propertyName) => Error.Create($"A value is required for {propertyName}");
+        public static Error RequiredValue<T>() => Error.Create($"{typeof(T).Name} was missing a required value");
+        public static Error RequiredValue<T>(Expression<Func<T, object>> property) => Error.Create($"A value for the {property.ToPropertyName()} property on {typeof(T).Name} is required");
+
+        //Invalid value
+        public static Error InvalidValue() => Error.Create("One of the given values was invalid");
+        public static Error InvalidValue(string reason) => Error.Create("An invalid value was given: " + reason);
+        public static Error InvalidValue<T>() => Error.Create($"The {typeof(T).Name} was invalid");
+        public static Error InvalidValue<T>(Expression<Func<T, object>> property) => Error.Create($"The value provided for {property.ToPropertyName()} on {typeof(T).Name} was invalid");
+        public static Error InvalidValue<T>(Expression<Func<T, object>> property,  string reason) 
+            => Error.Create($"The value provided for {property.ToPropertyName()} on {typeof(T).Name} was invalid: {reason}");
+
+        //Auth
+        public static Error NotAuthenticated() => Error.Create("Not authenticated");
+        public static Error NotAuthorized() => Error.Create("Not authorized");
+
+
+
+        #region Equality
         
         public override string ToString()
         {
             return $"{Code} ::: {Description}";
         }
 
-         
 
         public bool Equals(Error other)
         {
@@ -75,5 +103,9 @@ namespace Blauhaus.Errors
         {
             return !left.Equals(right);
         }
+
+
+
+        #endregion
     }
 }

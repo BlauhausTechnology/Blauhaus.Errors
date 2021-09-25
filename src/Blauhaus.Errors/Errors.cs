@@ -4,12 +4,12 @@ using Blauhaus.Common.Utils.Extensions;
 
 namespace Blauhaus.Errors
 {
+    [Obsolete("Use Error instead")]
     public static class Errors
     {
         public static Error Undefined = Error.Create("No definition exists for this error");
         public static Error Unexpected(string errorMessage = "") => Error.Create("An unexpected error has occured" + errorMessage == "" ? "" : ": " + errorMessage);
         public static Error Cancelled = Error.Create("The operation was cancelled");
-
         
         //Required value
         public static Error RequiredValue() => Error.Create("A required parameter was not provided");
@@ -24,5 +24,8 @@ namespace Blauhaus.Errors
         public static Error InvalidValue<T>(Expression<Func<T, object>> property) => Error.Create($"The value provided for {property.ToPropertyName()} on {typeof(T).Name} was invalid");
         public static Error InvalidValue<T>(Expression<Func<T, object>> property,  string reason) 
             => Error.Create($"The value provided for {property.ToPropertyName()} on {typeof(T).Name} was invalid: {reason}");
+         
+
     }
+     
 }
