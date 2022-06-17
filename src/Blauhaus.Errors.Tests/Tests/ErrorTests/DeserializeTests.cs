@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Text.Json;
+using NUnit.Framework;
 
 namespace Blauhaus.Errors.Tests.Tests.ErrorTests
 {
@@ -10,6 +11,22 @@ namespace Blauhaus.Errors.Tests.Tests.ErrorTests
             //Arrange
             var sut = TestErrors.TestErrorTwo;
             var serialized = sut.ToString();
+
+            //Act
+            var result = Error.Deserialize(serialized);
+
+            //Assert
+            Assert.AreEqual("TestErrorTwo ::: Description Two", result.ToString());
+            Assert.AreEqual(sut.Code, result.Code);
+            Assert.AreEqual(sut.Description, result.Description);
+        }
+        
+        [Test]
+        public void SHOULD_deserialzie_from_Json()
+        {
+            //Arrange
+            var sut = TestErrors.TestErrorTwo;
+            var serialized = JsonSerializer.Serialize(sut);
 
             //Act
             var result = Error.Deserialize(serialized);

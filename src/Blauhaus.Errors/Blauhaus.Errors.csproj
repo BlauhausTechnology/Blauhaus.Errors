@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blauhaus.Common.Utils" Version="2.1.0" />
-	<PackageReference Include="System.Text.Json" Version="6.0.2" />
+    <PackageReference Include="Blauhaus.Common.Utils" Version="2.1.7" />
+	<PackageReference Include="System.Text.Json" Version="6.0.5" />
 
   </ItemGroup>
 

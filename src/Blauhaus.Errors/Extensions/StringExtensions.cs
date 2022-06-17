@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Text.Json;
 
 namespace Blauhaus.Errors.Extensions
 {
+    
     public static class StringExtensions
     {
+        private static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        
         public static bool IsError(this string serializedError, Error expectedError)
         {
             return serializedError.IsError() &&
@@ -28,11 +32,18 @@ namespace Blauhaus.Errors.Extensions
                 error = serializedError.ToError();
                 return true;
             }
-
-            error = default;
-            return false;
+            try
+            {
+                error = JsonSerializer.Deserialize<Error>(serializedError, _serializerOptions);
+                return true;
+            }
+            catch (Exception e)
+            {
+                error = default;
+                return false;
+            }
         }
-
+ 
         public static Error ToError(this string serializedError)
         {
             return Error.Deserialize(serializedError);

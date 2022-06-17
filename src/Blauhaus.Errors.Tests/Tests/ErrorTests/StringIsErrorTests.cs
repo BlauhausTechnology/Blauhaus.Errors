@@ -1,4 +1,5 @@
-﻿using Blauhaus.Errors.Extensions;
+﻿using System.Text.Json;
+using Blauhaus.Errors.Extensions;
 using NUnit.Framework;
 
 namespace Blauhaus.Errors.Tests.Tests.ErrorTests
@@ -81,6 +82,34 @@ namespace Blauhaus.Errors.Tests.Tests.ErrorTests
 
             //Assert
             Assert.IsFalse(result);
+        }
+        
+        [Test]
+        public void IF_is_serialized_Json_Error_SHOULD_deserialize()
+        {
+            //Arrange
+            var serializedError = JsonSerializer.Serialize(TestErrors.TestErrorTwo);
+
+            //Act
+            var result = serializedError.IsError(out var error);
+
+            //Assert
+            Assert.That(result, Is.True);
+            Assert.That(error, Is.EqualTo(TestErrors.TestErrorTwo));
+        }
+        
+        [Test]
+        public void IF_is_serialized_Json_Error_case_insensitive_SHOULD_deserialize()
+        {
+            //Arrange
+            var serializedError = "{\"code\":\"TestErrorTwo\",\"description\":\"Description Two\"}";
+
+            //Act
+            var result = serializedError.IsError(out var error);
+
+            //Assert
+            Assert.That(result, Is.True);
+            Assert.That(error, Is.EqualTo(TestErrors.TestErrorTwo));
         }
     }
 }

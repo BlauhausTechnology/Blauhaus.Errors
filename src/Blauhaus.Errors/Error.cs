@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Blauhaus.Common.Utils.Attributes;
 using Blauhaus.Common.Utils.Extensions;
@@ -40,7 +41,14 @@ namespace Blauhaus.Errors
             var deserialized = serializedError.Split(new []{" ::: "}, StringSplitOptions.None);
             if (deserialized.Length != 2)
             {
-                throw new ArgumentException($"Input {serializedError} is not a valid serialized Error");
+                try
+                {
+                    return JsonSerializer.Deserialize<Error>(serializedError, new JsonSerializerOptions{ PropertyNameCaseInsensitive = true });
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentException($"Input {serializedError} is not a valid serialized Error");
+                }
             }
             return new Error(deserialized[0], deserialized[1]);
         }
