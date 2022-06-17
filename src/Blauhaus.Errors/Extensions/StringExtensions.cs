@@ -30,12 +30,12 @@ namespace Blauhaus.Errors.Extensions
             if (serializedError.Contains(" ::: "))
             {
                 error = serializedError.ToError();
-                return true;
+                return error !=null && !string.IsNullOrEmpty(error.Code);
             }
             try
             {
                 error = JsonSerializer.Deserialize<Error>(serializedError, _serializerOptions);
-                return true;
+                return error != null && !string.IsNullOrEmpty(error.Code);
             }
             catch (Exception e)
             {

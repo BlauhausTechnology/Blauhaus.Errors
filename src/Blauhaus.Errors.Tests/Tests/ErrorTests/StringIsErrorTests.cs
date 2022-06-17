@@ -111,5 +111,17 @@ namespace Blauhaus.Errors.Tests.Tests.ErrorTests
             Assert.That(result, Is.True);
             Assert.That(error, Is.EqualTo(TestErrors.TestErrorTwo));
         }
+        [Test]
+        public void IF_is_not_serialized_error_SHOULD_return_false()
+        {
+            //Arrange
+            const string serializedError = "{\r\n  \"error\": \"invalid_client\",\r\n  \"error_description\": \"The specified 'client_id' is invalid.\",\r\n  \"error_uri\": \"https://documentation.openiddict.com/errors/ID2052\"\r\n}";
+
+            //Act
+            var result = serializedError.IsError(out var error);
+
+            //Assert
+            Assert.That(result, Is.False);
+        }
     }
 }
