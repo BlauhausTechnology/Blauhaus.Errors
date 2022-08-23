@@ -33,8 +33,6 @@ namespace Blauhaus.Errors
             return new Error(errorCode, errorDescription);
         }
 
-        public static Error None { get; } = Create("No errors");
-        public static Error Generic(string description) => new Error("Error", description);
 
         public static Error Deserialize(string serializedError)
         {
@@ -53,12 +51,17 @@ namespace Blauhaus.Errors
             return new Error(deserialized[0], deserialized[1]);
         }
 
-
+        public static Error None { get; } = Create("No errors");
+        public static Error Generic(string description) => new Error("Error", description);
         public static Error Undefined = Create("No definition exists for this error");
         public static Error Unexpected(string errorMessage = "") => Create(errorMessage == "" ? "An unexpected error has occured" : errorMessage);
         public static Error Cancelled = Create("The operation was cancelled");
         public static Error Timeout = Create("The operation was not completed in the alloted time");
-
+        
+        //Not Found
+        public static Error NotFound() => Error.Create("The requested object was not found");
+        public static Error NotFound(string name) => Error.Create($"{name} was not found");
+        public static Error NotFound<T>() => Error.Create($"{typeof(T).Name} was not found");
         
         //Required value
         public static Error RequiredValue() => Create("A required parameter was not provided");

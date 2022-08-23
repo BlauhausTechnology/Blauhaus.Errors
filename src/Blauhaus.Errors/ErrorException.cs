@@ -24,7 +24,7 @@ namespace Blauhaus.Errors
 
         public ErrorException(string serializedError) : base(serializedError)
         {
-            Error = serializedError.IsError(out var error) ? error : Errors.Undefined;
+            Error = serializedError.IsError(out var error) ? error : Error.Undefined;
         }
          
 
